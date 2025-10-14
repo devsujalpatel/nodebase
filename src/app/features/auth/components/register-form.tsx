@@ -85,7 +85,7 @@ export const RegisterForm = () => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="grid-gap-6">
+              <div className="grid gap-6">
                 <div className="flex flex-col gap-4">
                   <Button
                     variant={"outline"}
@@ -93,6 +93,12 @@ export const RegisterForm = () => {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/logos/github.svg"
+                      width={20}
+                      height={20}
+                      alt="Github"
+                    />
                     Continue with Github
                   </Button>
                   <Button
@@ -101,6 +107,12 @@ export const RegisterForm = () => {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/logos/google.svg"
+                      width={20}
+                      height={20}
+                      alt="Google"
+                    />
                     Continue with Google
                   </Button>
                 </div>
