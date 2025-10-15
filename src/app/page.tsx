@@ -8,6 +8,9 @@ export default function Home() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const { data } = useQuery(trpc.getWorkflows.queryOptions());
+
+  const testAi = useMutation(trpc.testAi.mutationOptions());
+
   const create = useMutation(
     trpc.createWorkflow.mutationOptions({
       onSuccess: () => {
@@ -17,11 +20,14 @@ export default function Home() {
   );
 
   return (
-    <div className="flex h-screen items-center justify-center flex-col ">
+    <div className="flex h-screen gap-5 items-center justify-center flex-col ">
       Protected server component
       <div>
         <pre>{JSON.stringify(data, null, 2)}</pre>
       </div>
+      <Button onClick={() => testAi.mutate()} disabled={testAi.isPending}>
+        Test AI
+      </Button>
       <Button onClick={() => create.mutate()} disabled={create.isPending}>
         Create Workflow
       </Button>
