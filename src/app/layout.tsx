@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nodebase | Sujal Patel",
+  title: "Nodeflow | Sujal Patel",
   description: "Create ai workflows with ease.",
 };
 
