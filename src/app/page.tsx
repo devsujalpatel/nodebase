@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 // import { requireAuth } from "@/lib/auth-utils";
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export default function Home() {
   const trpc = useTRPC();
@@ -16,6 +17,9 @@ export default function Home() {
       onSuccess: () => {
         queryClient.invalidateQueries(trpc.getWorkflows.queryOptions());
       },
+      onError: () => {
+        toast.error("Something went wrong");
+      }
     })
   );
 
