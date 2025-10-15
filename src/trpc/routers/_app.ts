@@ -1,6 +1,4 @@
 import { inngest } from "@/inngest/client";
-import { google } from "@ai-sdk/google";
-import { generateText } from "ai";
 import { createTRPCRouter, protectedProcedure } from "../init";
 import prisma from "@/lib/db";
 
