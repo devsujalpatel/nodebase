@@ -1,7 +1,10 @@
-const Page = () => {
+import { requireAuth } from "@/lib/auth-utils";
+
+const Page = async () => {
+  await requireAuth();
   return (
     <div>
-      <h1>Executions</h1>
+      <h1>Execution</h1>
     </div>
   );
 };
