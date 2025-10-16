@@ -1,6 +1,10 @@
 "use client";
 import { EntityContainer, EntityHeader } from "@/components/entity-components";
-import { useSuspenseWorkflows } from "../hooks/use-workflows";
+import {
+  useCreateWorkflow,
+  useSuspenseWorkflows,
+} from "../hooks/use-workflows";
+import { useUpgradeModal } from "@/hooks/use-upgrade-modal";
 
 export const WorkflowsList = () => {
   const workflows = useSuspenseWorkflows();
@@ -12,15 +16,27 @@ export const WorkflowsList = () => {
 };
 
 export const WorkflowsHeader = ({ disabled }: { disabled?: boolean }) => {
+  const createWorkflow = useCreateWorkflow();
+  const { handleError, modal } = useUpgradeModal();
+
+  const handleCreate = () => {
+    createWorkflow.mutate(undefined, {
+      onError: (err) => {
+        handleError(err);
+      },
+    });
+  };
+
   return (
     <>
+      {modal}
       <EntityHeader
         title="Workflows"
         description="Create and manage your workflows"
-        onNew={() => {}}
+        onNew={handleCreate}
         newButtonLabel="New Workflow"
         disabled={disabled}
-        isCreating={false}
+        isCreating={createWorkflow.isPending}
       />
     </>
   );
