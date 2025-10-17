@@ -1,3 +1,3 @@
 # Nodeflow
 
-## An ai workflow automation tool that lets you connect APIs, apps, and databases using visual nodes.
+## An ai workflow automation tool that lets you create APIs, apps, and databases using visual nodes.
