@@ -1,5 +1,6 @@
 "use client";
 import {
+  EmptyView,
   EntityContainer,
   EntityHeader,
   EntityPagination,
@@ -33,6 +34,11 @@ export const WorkflowsSearch = () => {
 
 export const WorkflowsList = () => {
   const workflows = useSuspenseWorkflows();
+
+  if (workflows.data.items.length === 0) {
+    return <WorkflowEmpty />;
+  }
+
   return (
     <div className="flex flex-1 justify-center items-center">
       <p>{JSON.stringify(workflows.data, null, 2)}</p>
@@ -107,4 +113,27 @@ export const WorkflowsLoading = () => {
 
 export const WorkflowsError = () => {
   return <ErrorView message="Error loading workflows" />;
+};
+
+export const WorkflowEmpty = () => {
+  const createWorkflow = useCreateWorkflow();
+  const { handleError, modal } = useUpgradeModal();
+
+  const handleCreate = () => {
+    createWorkflow.mutate(undefined, {
+      onError: (error) => {
+        handleError(error);
+      },
+    });
+  };
+
+  return (
+    <>
+      {modal}
+      <EmptyView
+        onNew={handleCreate}
+        message="No Workflows found. Get started by creating one."
+      />
+    </>
+  );
 };
