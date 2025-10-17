@@ -3,6 +3,8 @@ import {
   EmptyView,
   EntityContainer,
   EntityHeader,
+  EntityItem,
+  EntityList,
   EntityPagination,
   EntitySearch,
   ErrorView,
@@ -16,6 +18,8 @@ import { useUpgradeModal } from "@/hooks/use-upgrade-modal";
 import { useRouter } from "next/navigation";
 import { useWorkflowsParams } from "../hooks/use-workflows-params";
 import { useEntitySearch } from "@/hooks/use-entity-search";
+import type { Workflow } from "@/generated/prisma";
+import { WorkflowIcon } from "lucide-react";
 
 export const WorkflowsSearch = () => {
   const [params, setParams] = useWorkflowsParams();
@@ -40,9 +44,12 @@ export const WorkflowsList = () => {
   }
 
   return (
-    <div className="flex flex-1 justify-center items-center">
-      <p>{JSON.stringify(workflows.data, null, 2)}</p>
-    </div>
+    <EntityList
+      items={workflows.data.items}
+      getKey={(workflow) => workflow.id}
+      renderTime={(workflow) => <WorkflowItem data={workflow} />}
+      emptyView={<WorkflowEmpty />}
+    />
   );
 };
 
@@ -116,6 +123,7 @@ export const WorkflowsError = () => {
 };
 
 export const WorkflowEmpty = () => {
+  const router = useRouter();
   const createWorkflow = useCreateWorkflow();
   const { handleError, modal } = useUpgradeModal();
 
@@ -123,6 +131,9 @@ export const WorkflowEmpty = () => {
     createWorkflow.mutate(undefined, {
       onError: (error) => {
         handleError(error);
+      },
+      onSuccess: (data) => {
+        router.push(`/workflows/${data.id}`);
       },
     });
   };
@@ -135,5 +146,22 @@ export const WorkflowEmpty = () => {
         message="No Workflows found. Get started by creating one."
       />
     </>
+  );
+};
+
+export const WorkflowItem = ({ data }: { data: Workflow }) => {
+  return (
+    <EntityItem
+      href={`/workflows/${data.id}`}
+      title={data.name}
+      subtitle={<>Updated TODO &bull; Created TODO</>}
+      image={
+        <div className="size-8 flex items-center justify-center">
+          <WorkflowIcon className="size-5 text-muted-foreground" />
+        </div>
+      }
+      onRemove={() => {}}
+      isRemoving={false}
+    />
   );
 };
