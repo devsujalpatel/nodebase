@@ -79,6 +79,13 @@ export const workflowsRouter = createTRPCRouter({
         sourceHandle: connection.fromOutput,
         targetHandle: connection.toInput,
       }));
+
+      return {
+        id: workflow.id,
+        name: workflow.name,
+        nodes,
+        edges,
+      }
     }),
 
   getMany: protectedProcedure
