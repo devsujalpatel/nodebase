@@ -16,10 +16,12 @@ import {
   Background,
   Controls,
   MiniMap,
+  Panel,
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
 import { nodeComponents } from "@/config/node-components";
+import { AddNodeButton } from "./add-node-button";
 
 export const EditorLoading = () => {
   return <LoadingView message="Loading editor..." />;
@@ -28,13 +30,6 @@ export const EditorLoading = () => {
 export const EditorError = () => {
   return <ErrorView message="Error loading editor" />;
 };
-
-const initialNodes = [
-  { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
-  { id: "n2", position: { x: 0, y: 100 }, data: { label: "Node 2" } },
-];
-
-const initialEdges = [{ id: "n1-n2", source: "n1", target: "n2" }];
 
 export const Editor = ({ workflowId }: { workflowId: string }) => {
   const { data: workflow } = useSuspenseWorkflow(workflowId);
@@ -74,6 +69,9 @@ export const Editor = ({ workflowId }: { workflowId: string }) => {
         <Background />
         <Controls />
         <MiniMap />
+        <Panel position="top-right">
+          <AddNodeButton />
+        </Panel>
       </ReactFlow>
     </div>
   );
