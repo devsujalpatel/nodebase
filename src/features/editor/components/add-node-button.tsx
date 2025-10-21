@@ -7,7 +7,7 @@ import { NodeSelector } from "@/components/node-selector";
 export const AddNodeButton = memo(() => {
   const [selectorOpen, setSelectorOpen] = useState(false);
   return (
-    <NodeSelector open={selectorOpen} openChange={setSelectorOpen}>
+    <NodeSelector open={selectorOpen} onOpenChange={setSelectorOpen}>
       <Button
         onClick={() => {}}
         size={"icon"}
