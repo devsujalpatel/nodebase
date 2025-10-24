@@ -8,8 +8,7 @@ import { BaseNode, BaseNodeContent } from "@/components/react-flow/base-node";
 import { BaseHandle } from "@/components/react-flow/base-handle";
 import { WorkflowNode } from "@/components/workflow-node";
 
-
-interface BaseExecutionNodeProps extends NodeProps {
+interface BaseTriggerNodeProps extends NodeProps {
   icon: LucideIcon | string;
   name: string;
   children?: ReactNode;
@@ -19,7 +18,7 @@ interface BaseExecutionNodeProps extends NodeProps {
   onDoubleClick?: () => void;
 }
 
-export const BaseExecutionNode = memo(
+export const BaseTriggerNode = memo(
   ({
     id,
     icon: Icon,
@@ -28,7 +27,7 @@ export const BaseExecutionNode = memo(
     children,
     onSettings,
     onDoubleClick,
-  }: BaseExecutionNodeProps) => {
+  }: BaseTriggerNodeProps) => {
     // TODO: add delete functionality
     const handleDelete = () => {};
 
@@ -40,7 +39,10 @@ export const BaseExecutionNode = memo(
         onDelete={handleDelete}
       >
         {/* // TODO: Wrap within NodeStatusIndicator */}
-        <BaseNode onDoubleClick={onDoubleClick}>
+        <BaseNode
+          onDoubleClick={onDoubleClick}
+          className="rounded-l-2xl relative group"
+        >
           <BaseNodeContent>
             {typeof Icon === "string" ? (
               <Image src={Icon} alt={name} width={16} height={16} />
@@ -48,7 +50,6 @@ export const BaseExecutionNode = memo(
               <Icon className="size-5" />
             )}
             {children}
-            <BaseHandle id="target-1" type="target" position={Position.Left} />
             <BaseHandle id="source-1" type="source" position={Position.Right} />
           </BaseNodeContent>
         </BaseNode>
@@ -57,4 +58,4 @@ export const BaseExecutionNode = memo(
   }
 );
 
-BaseExecutionNode.displayName = "BaseExecutionNode";
+BaseTriggerNode.displayName = "BaseTriggerNode";
