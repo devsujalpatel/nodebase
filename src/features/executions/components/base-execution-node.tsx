@@ -1,13 +1,13 @@
 "use client";
 
-import { type NodeProps } from "@xyflow/react";
+import { type NodeProps, Position } from "@xyflow/react";
 import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
-import { memo, type ReactNode, useCallback } from "react";
-import { BaseNode, BaseNodeContent } from "./react-flow/base-node";
-import { BaseHandle } from "./react-flow/base-handle";
-import { WorkflowNode } from "./workflow-node";
-import { Position } from "@xyflow/react";
+import { memo, type ReactNode } from "react";
+import { BaseNode, BaseNodeContent } from "@/components/react-flow/base-node";
+import { BaseHandle } from "@/components/react-flow/base-handle";
+import { WorkflowNode } from "@/components/workflow-node";
+
 
 interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;
@@ -29,6 +29,7 @@ export const BaseExecutionNode = memo(
     onSettings,
     onDoubleClick,
   }: BaseExecutionNodeProps) => {
+    // TODO: add delete functionality
     const handleDelete = () => {};
 
     return (
@@ -38,6 +39,7 @@ export const BaseExecutionNode = memo(
         onSettings={onSettings}
         onDelete={handleDelete}
       >
+        {/* // TODO: Wrap within NodeStatusIndicator */}
         <BaseNode onDoubleClick={onDoubleClick}>
           <BaseNodeContent>
             {typeof Icon === "string" ? (
