@@ -55,7 +55,7 @@ export const workflowsRouter = createTRPCRouter({
             source: z.string(),
             target: z.string(),
             sourceHandle: z.string().nullish(),
-            targetHnalde: z.string().nullish(),
+            targetHandlde: z.string().nullish(),
           })
         ),
       })
@@ -96,7 +96,7 @@ export const workflowsRouter = createTRPCRouter({
             fromNodeId: edge.source,
             toNodeId: edge.target,
             fromOutput: edge.sourceHandle || "main",
-            toInput: edge.targetHnalde || "main",
+            toInput: edge.targetHandlde || "main",
           })),
         });
         // Update workflow's updatedAt timestamp
