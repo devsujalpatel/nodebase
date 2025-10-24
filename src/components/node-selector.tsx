@@ -13,7 +13,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "./ui/sheet";
 import { NodeType } from "@/generated/prisma";
 import { Separator } from "./ui/separator";
 
