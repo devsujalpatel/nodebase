@@ -41,7 +41,7 @@ export const BaseTriggerNode = memo(
         {/* // TODO: Wrap within NodeStatusIndicator */}
         <BaseNode
           onDoubleClick={onDoubleClick}
-          className="rounded-l-2xl relatvie group"
+          className="rounded-l-2xl relative group"
         >
           <BaseNodeContent>
             {typeof Icon === "string" ? (
