@@ -1,13 +1,12 @@
 "use client";
 
-import { type NodeProps, Position } from "@xyflow/react";
+import { type NodeProps, Position, useReactFlow } from "@xyflow/react";
 import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { memo, type ReactNode } from "react";
 import { BaseNode, BaseNodeContent } from "@/components/react-flow/base-node";
 import { BaseHandle } from "@/components/react-flow/base-handle";
 import { WorkflowNode } from "@/components/workflow-node";
-
 
 interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;
@@ -29,8 +28,20 @@ export const BaseExecutionNode = memo(
     onSettings,
     onDoubleClick,
   }: BaseExecutionNodeProps) => {
-    // TODO: add delete functionality
-    const handleDelete = () => {};
+    const { setNodes, setEdges } = useReactFlow();
+    const handleDelete = () => {
+      setNodes((currentNodes) => {
+        const updatedNodes = currentNodes.filter((node) => node.id !== id);
+        return updatedNodes;
+      });
+
+      setEdges((currentEdges) => {
+        const updatedEdges = currentEdges.filter(
+          (edge) => edge.source !== id && edge.target !== id
+        );
+        return updatedEdges;
+      });
+    };
 
     return (
       <WorkflowNode
