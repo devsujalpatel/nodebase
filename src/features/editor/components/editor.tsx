@@ -68,9 +68,6 @@ export const Editor = ({ workflowId }: { workflowId: string }) => {
         fitView
         nodeTypes={nodeComponents}
         onInit={setEditor}
-        proOptions={{
-          hideAttribution: true,
-        }}
       >
         <Background />
         <Controls />
