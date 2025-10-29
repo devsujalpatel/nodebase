@@ -2,7 +2,7 @@
 
 import { NodeProps, Node, useReactFlow } from "@xyflow/react";
 import { GlobeIcon } from "lucide-react";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { BaseExecutionNode } from "../base-execution-node";
 
 type HttpRequestNodeData = {
